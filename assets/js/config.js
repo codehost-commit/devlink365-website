@@ -6,11 +6,6 @@
  * and it becomes a working link everywhere on the site — no other edits needed.
  */
 window.DEVLINK365_LINKS = {
-  // TODO: set once the package is published, e.g.
-  // "https://www.npmjs.com/package/devlink365"
-  npm: null,
-
-  // TODO: set once the repository is public, e.g.
-  // "https://github.com/your-account/devlink365"
-  github: null,
+  npm: "https://www.npmjs.com/package/devlink365",
+  github: "https://github.com/codehost-commit/devlink365",
 };
