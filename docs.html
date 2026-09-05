@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Documentation — DevLink365</title>
+<meta name="description" content="How to use DevLink365: the CLI, port selection, link lifetimes, the library API, security, and running your own relay.">
+<link rel="canonical" href="https://devlink365.dev/docs.html">
+<meta name="theme-color" content="#f4f4f0">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/site.css">
+<script src="/assets/js/config.js"></script>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <div class="wrap nav__inner">
+    <a class="brand" href="/">
+      <span class="brand__mark">
+        <svg viewBox="0 0 32 32" fill="none" aria-hidden="true" style="color:#0a0a0a">
+          <rect x="1.25" y="1.25" width="29.5" height="29.5" stroke="currentColor" stroke-width="2.5"/>
+          <rect x="7" y="7" width="8" height="8" fill="currentColor" opacity=".28"/>
+          <rect x="17" y="17" width="8" height="8" fill="#1f9d4d"/>
+          <path d="M15.5 11.5h6.5v6.5" stroke="#1f9d4d" stroke-width="2.5"/>
+        </svg>
+      </span>
+      <span>DevLink<span class="brand__365">365</span></span>
+    </a>
+
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Menu">
+      <svg width="18" height="14" viewBox="0 0 18 14" fill="none" aria-hidden="true">
+        <path d="M0 1h18M0 7h18M0 13h18" stroke="currentColor" stroke-width="1.6"/>
+      </svg>
+    </button>
+
+    <nav class="nav__links" id="nav-links" aria-label="Primary">
+      <a class="nav__link" href="/">Home</a>
+      <a class="nav__link" href="/#how">How it works</a>
+      <a class="nav__link" href="/docs.html" aria-current="page">Docs</a>
+      <a class="nav__link" data-link="github">GitHub</a>
+      <a class="btn btn--solid nav__cta" data-link="npm">npm</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="section">
+  <div class="wrap">
+
+    <div class="section-head">
+      <p class="eyebrow">Documentation</p>
+      <h1 style="font-size:clamp(34px,5vw,54px)">Everything DevLink365 does.</h1>
+      <p class="lead">Which is not much, on purpose. You should be able to read this page in one sitting.</p>
+    </div>
+
+    <div class="doc">
+      <aside class="toc">
+        <h4>On this page</h4>
+        <ul>
+          <li><a href="#quickstart">Quick start</a></li>
+          <li><a href="#cli">CLI reference</a></li>
+          <li><a href="#ports">Choosing a port</a></li>
+          <li><a href="#expiration">Link lifetime</a></li>
+          <li><a href="#naming">Naming a link</a></li>
+          <li><a href="#library">Library API</a></li>
+          <li><a href="#security">Security</a></li>
+          <li><a href="#self-host">Self-hosting</a></li>
+          <li><a href="#troubleshooting">Troubleshooting</a></li>
+        </ul>
+      </aside>
+
+      <article class="prose">
+
+        <h2 id="quickstart">Quick start</h2>
+        <p>DevLink365 shares a server you are already running. Start your app first.</p>
+        <pre><code>npm run dev          <span class="t-dim"># terminal 1</span>
+npx devlink365       <span class="t-dim"># terminal 2</span></code></pre>
+        <p>That is it. The CLI prints a public HTTPS URL. Send it to someone; they see your app.</p>
+        <pre><code>  ✓ DevLink365 is running
+
+  Local:   http://localhost:3000
+  Public:  https://a8f3k2qd.devlink365.dev
+
+  Expires: in 4 hours</code></pre>
+        <p>Nothing is installed globally — <code>npx</code> fetches the package, runs it, and forgets it. If you use it constantly:</p>
+        <pre><code>npm install -g devlink365</code></pre>
+        <p>Requires Node.js 18.17 or newer. The package has no runtime dependencies.</p>
+
+        <h2 id="cli">CLI reference</h2>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Flag</th><th>What it does</th><th>Default</th></tr></thead>
+            <tbody>
+              <tr><td>-p, --port &lt;number&gt;</td><td>Port your app is listening on.</td><td>detected</td></tr>
+              <tr><td>--host &lt;host&gt;</td><td>Local host to forward to.</td><td>127.0.0.1</td></tr>
+              <tr><td>-e, --expires &lt;time&gt;</td><td>How long the link stays live: <code>30m</code>, <code>4h</code>, <code>1h30m</code>, <code>24h</code>.</td><td>4h</td></tr>
+              <tr><td>-n, --name &lt;label&gt;</td><td>Prefix for the public subdomain.</td><td>random</td></tr>
+              <tr><td>--relay &lt;url&gt;</td><td>Relay to connect to. Point this at your own.</td><td>wss://relay.devlink365.dev</td></tr>
+              <tr><td>--json</td><td>Print one JSON line with the tunnel details, then stay quiet.</td><td>off</td></tr>
+              <tr><td>-q, --quiet</td><td>Do not log individual requests.</td><td>off</td></tr>
+              <tr><td>--no-rewrite-host</td><td>Pass the public <code>Host</code> header through to your app instead of rewriting it.</td><td>off</td></tr>
+              <tr><td>--insecure</td><td>Skip TLS verification. Self-hosted relays with self-signed certificates only.</td><td>off</td></tr>
+              <tr><td>-y, --yes</td><td>Do not ask for confirmation.</td><td>off</td></tr>
+              <tr><td>-h, --help</td><td>Show help.</td><td></td></tr>
+              <tr><td>-v, --version</td><td>Show the version.</td><td></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>A bare number is treated as a port, so <code>npx devlink365 5173</code> works too. The environment variable <code>DEVLINK365_RELAY</code> sets a default relay.</p>
+
+        <h2 id="ports">Choosing a port</h2>
+        <p>With no <code>--port</code>, DevLink365 probes the ports that development tooling actually uses — 3000, 5173, 8080, 4321, 8000, 4200 and a dozen more — and also reads the <code>dev</code> script in a nearby <code>package.json</code> for a port you have configured yourself.</p>
+        <p>It only ever auto-selects a port that answered with a real HTTP response. A port that is open but does not speak HTTP is almost always a database, a language server, or something else that has no business being on the public internet, so it is never chosen for you. You can still share one deliberately with <code>--port</code>.</p>
+        <p>If more than one dev server is running, the most likely one is used and the others are printed so you can pick a different one.</p>
+
+        <h2 id="expiration">Link lifetime</h2>
+        <p>Every link dies. That is the point — a link you forgot about is a security problem, so DevLink365 does not let you make one.</p>
+        <pre><code>npx devlink365 --expires 30m
+npx devlink365 --expires 4h      <span class="t-dim"># the default</span>
+npx devlink365 --expires 24h     <span class="t-dim"># the maximum</span></code></pre>
+        <p>The ceiling is 24 hours and it is enforced by the relay, not by the CLI, so it cannot be argued out of. You get a warning in the terminal at five minutes and again at one minute.</p>
+        <p>Three things end a link: the clock running out, the CLI exiting, and your machine losing its connection for long enough to fail a keepalive. In all three cases the URL stops resolving to your app straight away and visitors get a plain page explaining that the link has expired.</p>
+
+        <h2 id="naming">Naming a link</h2>
+        <pre><code>npx devlink365 --name checkout-demo
+<span class="t-dim"># https://checkout-demo-k7m2xq.devlink365.dev</span></code></pre>
+        <p><code>--name</code> is a prefix, not a reservation. Random characters are always appended, because a guessable name must never produce a guessable URL. Reserved labels — <code>www</code>, <code>api</code>, <code>admin</code>, <code>login</code> and similar — are refused outright and you get a random id instead.</p>
+
+        <h2 id="library">Library API</h2>
+        <p>The same tunnel, driven from code. Useful when a test suite or CI job needs a public URL for a few minutes.</p>
+        <pre><code>import { createTunnel } from "devlink365";
+
+const tunnel = await createTunnel({
+  port: 3000,
+  ttlMs: 60 * 60 * 1000,   // one hour
+  label: "ci-preview",
+});
+
+console.log(tunnel.details?.url);
+
+tunnel.on("request", ({ method, url, status, durationMs }) => {
+  console.log(method, url, status, durationMs);
+});
+
+// when you are done
+tunnel.stop();</code></pre>
+        <p>The tunnel emits <code>ready</code>, <code>request</code>, <code>expiring</code>, <code>notice</code>, <code>error</code> and <code>closed</code>. Types ship with the package.</p>
+        <p>For scripts that only need the URL, <code>--json</code> is simpler:</p>
+        <pre><code>URL=$(npx devlink365 --json | head -1 | node -pe 'JSON.parse(require("fs").readFileSync(0)).url')</code></pre>
+
+        <h2 id="security">Security</h2>
+        <p>DevLink365 exposes a development server to the public internet. Here is the honest accounting.</p>
+        <p><strong>What protects you.</strong> URLs come from a cryptographic random source and are not enumerable. Links expire, with a hard 24-hour ceiling enforced server-side. Closing the CLI kills the URL immediately. Only one level of subdomain is ever routed, so nothing slips past the wildcard certificate. Reserved hostnames can never be claimed. Request bodies are capped at 25&nbsp;MB, visitors are rate limited per tunnel, and a single machine cannot open an unlimited number of links.</p>
+        <p><strong>What does not protect you.</strong> There is no password, no visitor authentication, and no allow-list yet. Anyone who has the URL can use it for as long as it lives.</p>
+        <blockquote>Treat a DevLink365 URL as public. Do not point one at an app holding production data, real credentials, or an admin interface you would not hand to a stranger.</blockquote>
+        <p>Your local app sees <code>X-Forwarded-Proto: https</code>, <code>X-Forwarded-Host</code> with the public hostname, and <code>X-Forwarded-For</code> with the visitor's address. By default the <code>Host</code> header is rewritten to your local origin, which is what makes most frameworks behave as though nothing unusual is happening. Use <code>--no-rewrite-host</code> if your app needs to see the public hostname instead.</p>
+
+        <h2 id="self-host">Self-hosting a relay</h2>
+        <p>The relay ships in the same package, so you can run the whole thing yourself.</p>
+        <pre><code>npx devlink365-server --domain tunnels.example.com --trust-proxy</code></pre>
+        <pre><code>npx devlink365 --relay wss://tunnels.example.com</code></pre>
+        <p>You need two DNS records pointing at the relay and a wildcard certificate:</p>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Record</th><th>Type</th><th>Points to</th></tr></thead>
+            <tbody>
+              <tr><td>tunnels.example.com</td><td>A / AAAA / CNAME</td><td>your relay host</td></tr>
+              <tr><td>*.tunnels.example.com</td><td>A / AAAA / CNAME</td><td>your relay host</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Terminate TLS in front of the process — Cloudflare, Caddy, or a load balancer are all fine — and make sure it forwards WebSocket upgrades. Start the relay with <code>--trust-proxy</code> so rate limits see the real visitor address rather than your proxy's.</p>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Relay flag</th><th>What it does</th><th>Default</th></tr></thead>
+            <tbody>
+              <tr><td>--domain &lt;host&gt;</td><td>Base domain. Required.</td><td>—</td></tr>
+              <tr><td>--port &lt;number&gt;</td><td>Port to listen on.</td><td>8787 or $PORT</td></tr>
+              <tr><td>--scheme &lt;https|http&gt;</td><td>Scheme used in the URLs handed to agents.</td><td>https</td></tr>
+              <tr><td>--trust-proxy</td><td>Read X-Forwarded-For. Only behind a proxy you control.</td><td>off</td></tr>
+              <tr><td>--max-ttl &lt;hours&gt;</td><td>Longest tunnel lifetime.</td><td>24</td></tr>
+              <tr><td>--max-tunnels &lt;n&gt;</td><td>Concurrent tunnels for the whole relay.</td><td>5000</td></tr>
+              <tr><td>--max-per-ip &lt;n&gt;</td><td>Concurrent tunnels per source address.</td><td>5</td></tr>
+              <tr><td>--rpm &lt;n&gt;</td><td>Requests per minute per visitor per tunnel.</td><td>600</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Health check: <code>GET /_devlink/health</code> on the apex returns JSON with the live tunnel count.</p>
+
+        <h2 id="troubleshooting">Troubleshooting</h2>
+
+        <h3>"Could not find a local web server to share"</h3>
+        <p>Nothing was listening on any of the usual ports. Start your app first, then run DevLink365 in a second terminal. If your app is on an unusual port, name it: <code>npx devlink365 --port 4321</code>.</p>
+
+        <h3>My app loads but the styles are missing</h3>
+        <p>Usually an absolute asset URL pointing at <code>localhost</code>. Most dev servers handle this once they see <code>X-Forwarded-Host</code>; if yours needs the public hostname in <code>Host</code>, try <code>--no-rewrite-host</code>.</p>
+
+        <h3>Hot reload keeps disconnecting</h3>
+        <p>WebSockets are forwarded, but some dev servers hard-code the reload socket to <code>localhost</code>. Vite users can set <code>server.hmr.clientPort: 443</code>; Next.js generally works as-is.</p>
+
+        <h3>The link stopped working before it expired</h3>
+        <p>Almost always the machine sleeping or the network dropping. The CLI notices a failed keepalive and closes the tunnel rather than leaving a URL that silently swallows requests. Run it again for a fresh link.</p>
+
+        <h3>"This relay is at capacity"</h3>
+        <p>Too many tunnels are open. Wait a minute, or run your own relay — see <a href="#self-host">self-hosting</a>.</p>
+
+        <div class="btn-row" style="margin-top:44px">
+          <a class="btn btn--green" href="/#start">
+            Back to the top <span class="arrow" aria-hidden="true">&rarr;</span>
+          </a>
+          <a class="btn" data-link="github">
+            View on GitHub <span class="arrow" aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+
+      </article>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__bottom" style="border-top:0;padding-top:0">
+      <span>&copy; 2026 DevLink365</span>
+      <span><a href="/">devlink365.dev</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/js/site.js" defer></script>
+</body>
+</html>
