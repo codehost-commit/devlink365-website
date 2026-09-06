@@ -74,10 +74,10 @@
         </a>
       </div>
 
-      <div class="countdown" data-countdown="2026-09-06T16:30:00-05:00" aria-live="polite">
+      <div class="countdown" data-countdown="2026-09-06T20:00:00-05:00" aria-live="polite">
         <div class="countdown__head">
           <span>Public launch</span>
-          <span>Sep 6, 2026 / 4:30 PM CT</span>
+          <span>Sep 6, 2026 / 8:00 PM CT</span>
         </div>
         <div class="countdown__body">
           <div class="countdown__grid" data-countdown-grid>
@@ -261,89 +261,6 @@
   </div>
 </section>
 
-<!-- ========================== FRAMEWORKS ========================== -->
-<section class="section" id="frameworks">
-  <div class="wrap">
-    <div class="section-head" data-reveal>
-      <p class="eyebrow">Compatibility</p>
-      <h2>If it speaks HTTP on a port, it works.</h2>
-      <p class="lead">
-        DevLink365 forwards raw HTTP. It has no opinion about what is on the
-        other end, which is why the core package will never depend on a
-        framework. Deeper, automatic integrations are planned per ecosystem.
-      </p>
-    </div>
-
-    <div class="chips" data-reveal>
-      <span class="chip">Next.js</span>
-      <span class="chip">Vite</span>
-      <span class="chip">React</span>
-      <span class="chip">Vue</span>
-      <span class="chip">Svelte</span>
-      <span class="chip">Astro</span>
-      <span class="chip">Nuxt</span>
-      <span class="chip">Remix</span>
-      <span class="chip">Node</span>
-      <span class="chip">Express</span>
-      <span class="chip">Hono</span>
-      <span class="chip">Fastify</span>
-      <span class="chip">Django</span>
-      <span class="chip">Flask</span>
-      <span class="chip">Rails</span>
-      <span class="chip">Laravel</span>
-      <span class="chip">Go</span>
-      <span class="chip">Hugo</span>
-      <span class="chip">Jekyll</span>
-      <span class="chip">python -m http.server</span>
-    </div>
-  </div>
-</section>
-
-<!-- =========================== SECURITY =========================== -->
-<section class="section section--sunk" id="security">
-  <div class="wrap">
-    <div class="section-head" data-reveal>
-      <p class="eyebrow">Security</p>
-      <h2>You are pointing the internet at your laptop.</h2>
-      <p class="lead">
-        That is the whole idea, and it is also the whole risk. Here is exactly
-        what DevLink365 does about it, and what it does not do yet.
-      </p>
-    </div>
-
-    <ul class="checklist" data-reveal>
-      <li>
-        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8.5l4 4 8-9" stroke="currentColor" stroke-width="2"/></svg>
-        <span><strong>Unguessable URLs</strong>Ids come from a cryptographic random source over an alphabet with no vowels and no look-alike characters. Naming a link never removes the random part.</span>
-      </li>
-      <li>
-        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8.5l4 4 8-9" stroke="currentColor" stroke-width="2"/></svg>
-        <span><strong>Everything expires</strong>Four hours by default, twenty-four at the absolute maximum, enforced by the relay rather than trusted to the client.</span>
-      </li>
-      <li>
-        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8.5l4 4 8-9" stroke="currentColor" stroke-width="2"/></svg>
-        <span><strong>Ctrl+C is final</strong>Closing the CLI closes the tunnel and the URL dies with it. Immediately, not eventually.</span>
-      </li>
-      <li>
-        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8.5l4 4 8-9" stroke="currentColor" stroke-width="2"/></svg>
-        <span><strong>Reserved names are off limits</strong>No tunnel can ever be served at a hostname people reasonably trust, and only one level of subdomain is ever routed.</span>
-      </li>
-      <li>
-        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8.5l4 4 8-9" stroke="currentColor" stroke-width="2"/></svg>
-        <span><strong>Your database stays put</strong>Automatic detection only ever selects a port that answered with HTTP, so an open Postgres port is never quietly published.</span>
-      </li>
-      <li>
-        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8.5l4 4 8-9" stroke="currentColor" stroke-width="2"/></svg>
-        <span><strong>Limits, not promises</strong>Request bodies are capped, visitors are rate limited per tunnel, and one machine cannot open an unbounded number of links.</span>
-      </li>
-      <li>
-        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1.5v13M1.5 8h13" stroke="currentColor" stroke-width="2"/></svg>
-        <span><strong>Not yet: passwords or visitor auth</strong>Until those ship, treat a DevLink365 URL as public. Anyone holding it can reach your app, so do not point one at something with real credentials or production data.</span>
-      </li>
-    </ul>
-  </div>
-</section>
-
 <!-- =========================== ROADMAP ============================ -->
 <section class="section section--dark" id="roadmap">
   <div class="wrap">
@@ -435,7 +352,6 @@
         <h4>Product</h4>
         <ul>
           <li><a href="/#how">How it works</a></li>
-          <li><a href="/#security">Security</a></li>
           <li><a href="/#roadmap">Roadmap</a></li>
         </ul>
       </div>
