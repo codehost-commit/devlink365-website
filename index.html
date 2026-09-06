@@ -153,6 +153,34 @@
   </div>
 </section>
 
+<!-- ============================= DEMO ============================= -->
+<section class="section" id="demo" aria-label="Product demo">
+  <div class="wrap">
+    <div class="player" data-player>
+      <video class="player__video" data-video
+             src="/assets/DevLink365%20Demo.mp4"
+             muted loop autoplay playsinline preload="auto"></video>
+      <button class="player__big" type="button" data-bigplay aria-label="Play with sound">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+      </button>
+      <div class="player__controls">
+        <button class="player__btn" type="button" data-toggle aria-label="Play">
+          <svg class="ic-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+          <svg class="ic-pause" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M6 5h4v14H6zM14 5h4v14h-4z" fill="currentColor"/></svg>
+        </button>
+        <input class="player__seek" type="range" min="0" max="100" value="0" step="0.1" data-seek aria-label="Seek">
+        <button class="player__btn" type="button" data-mute aria-label="Unmute">
+          <svg class="ic-vol" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3z" fill="currentColor"/><path d="M16.5 8.5a4 4 0 0 1 0 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <svg class="ic-muted" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M3 9v6h4l5 5V4L7 9H3z" fill="currentColor"/><path d="M16 9l5 6M21 9l-5 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+        </button>
+        <button class="player__btn" type="button" data-full aria-label="Fullscreen">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- =========================== TERMINAL =========================== -->
 <section class="section section--sunk" id="start">
   <div class="wrap">
@@ -188,63 +216,6 @@
   <span class="t-dim">14:22:07  GET    </span><span class="t-ok">200</span><span class="t-dim">  /_next/static/chunk.js  3ms &middot; 89.2 kB</span>
   <span class="t-dim">14:22:11  POST   </span><span class="t-ok">201</span><span class="t-dim">  /api/checkout          48ms &middot; 312 B</span>
   <span class="t-dim">14:23:02  GET    </span><span class="t-warn">404</span><span class="t-dim">  /favicon.ico            2ms &middot; 0 B</span></pre>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- =========================== FEATURES =========================== -->
-<section class="section" id="features">
-  <div class="wrap">
-    <div class="section-head" data-reveal>
-      <p class="eyebrow">What you get today</p>
-      <h2>A small tool that does one thing properly.</h2>
-      <p class="lead">
-        Everything listed here works right now. Nothing on this page describes
-        something we intend to build later. That has its own section, further down.
-      </p>
-    </div>
-
-    <div class="grid" data-reveal>
-      <div class="cell">
-        <svg class="cell__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 12h18M13 4l8 8-8 8" stroke="currentColor" stroke-width="2"/></svg>
-        <h3>Instant public URL</h3>
-        <p>From typing the command to holding a working link is about two seconds.</p>
-      </div>
-      <div class="cell">
-        <svg class="cell__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="10" width="16" height="11" stroke="currentColor" stroke-width="2"/><path d="M8 10V7a4 4 0 018 0v3" stroke="currentColor" stroke-width="2"/></svg>
-        <h3>HTTPS, always</h3>
-        <p>Every link is served over TLS, so browsers, webhooks and service workers all behave.</p>
-      </div>
-      <div class="cell">
-        <svg class="cell__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3.5 2" stroke="currentColor" stroke-width="2"/></svg>
-        <h3>Temporary by design</h3>
-        <p>Pick 30 minutes or 24 hours. When the time is up the URL stops working, and so does Ctrl+C.</p>
-      </div>
-      <div class="cell">
-        <svg class="cell__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10" stroke="currentColor" stroke-width="2"/></svg>
-        <h3>No deployment</h3>
-        <p>There is no build step, no container, and nothing to push. Your machine is the server.</p>
-      </div>
-      <div class="cell">
-        <svg class="cell__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 5l-5 7 5 7M16 5l5 7-5 7" stroke="currentColor" stroke-width="2"/></svg>
-        <h3>Framework agnostic</h3>
-        <p>If it answers HTTP on a port, DevLink365 can share it. That includes things that are not JavaScript.</p>
-      </div>
-      <div class="cell">
-        <svg class="cell__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M3 12h18M12 3c2.5 2.7 2.5 15.3 0 18M12 3c-2.5 2.7-2.5 15.3 0 18" stroke="currentColor" stroke-width="1.6"/></svg>
-        <h3>Share from anywhere</h3>
-        <p>The connection is outbound only, so it works behind NAT, a VPN, or a corporate firewall.</p>
-      </div>
-      <div class="cell">
-        <svg class="cell__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v6M12 15v6M3 12h6M15 12h6" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/></svg>
-        <h3>WebSockets included</h3>
-        <p>Hot module reload keeps working through the tunnel, and so do your app's own sockets.</p>
-      </div>
-      <div class="cell">
-        <svg class="cell__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 18V9M10 18V4M16 18v-6M22 18V7" stroke="currentColor" stroke-width="2"/></svg>
-        <h3>A live request log</h3>
-        <p>Every request that comes through prints in your terminal with its status, timing and size.</p>
       </div>
     </div>
   </div>
@@ -464,7 +435,6 @@
         <h4>Product</h4>
         <ul>
           <li><a href="/#how">How it works</a></li>
-          <li><a href="/#features">Features</a></li>
           <li><a href="/#security">Security</a></li>
           <li><a href="/#roadmap">Roadmap</a></li>
         </ul>
