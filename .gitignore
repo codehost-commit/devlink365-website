@@ -1,1 +1,7 @@
 .vercel
+node_modules/
+.DS_Store
+*.DS_Store
+package.json
+package-lock.json
+Professional Picture.png

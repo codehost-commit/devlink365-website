@@ -3,20 +3,54 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Page not found — DevLink365</title>
+<title>DevLink // Not found</title>
 <meta name="robots" content="noindex">
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/assets/css/site.css">
 <script src="/assets/js/config.js"></script>
 </head>
 <body>
-<main class="section" style="min-height:70vh;display:flex;align-items:center">
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <div class="wrap nav__inner">
+    <a class="brand" href="/">
+      <span class="brand__mark">
+        <svg viewBox="0 0 32 32" fill="none" aria-hidden="true" style="color:#0a0a0a">
+          <rect x="1.25" y="1.25" width="29.5" height="29.5" stroke="currentColor" stroke-width="2.5"/>
+          <rect x="7" y="7" width="8" height="8" fill="currentColor" opacity=".28"/>
+          <rect x="17" y="17" width="8" height="8" fill="#1f9d4d"/>
+          <path d="M15.5 11.5h6.5v6.5" stroke="#1f9d4d" stroke-width="2.5"/>
+        </svg>
+      </span>
+      <span>DevLink<span class="brand__365">365</span></span>
+    </a>
+
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Menu">
+      <svg width="18" height="14" viewBox="0 0 18 14" fill="none" aria-hidden="true">
+        <path d="M0 1h18M0 7h18M0 13h18" stroke="currentColor" stroke-width="1.6"/>
+      </svg>
+    </button>
+
+    <nav class="nav__links" id="nav-links" aria-label="Primary">
+      <a class="nav__link" href="/">Home</a>
+      <a class="nav__link" href="/#how">How it works</a>
+      <a class="nav__link" href="/docs.html">Docs</a>
+      <a class="nav__link" href="/team.html">Team</a>
+      <a class="nav__link" data-link="github">GitHub</a>
+      <a class="btn btn--solid nav__cta" data-link="npm">npm</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="section" style="min-height:60vh;display:flex;align-items:center">
   <div class="wrap" style="max-width:720px">
     <p class="eyebrow">404</p>
     <h1 style="font-size:clamp(34px,6vw,60px);margin-bottom:20px">This page isn't here.</h1>
     <p class="lead" style="margin-bottom:32px">
       If you were given a <code class="mono">*.devlink365.dev</code> link, use that exact
-      URL — tunnels live on their own subdomains, not on this site.
+      URL. Tunnels live on their own subdomains, not on this site.
     </p>
     <div class="btn-row">
       <a class="btn btn--solid" href="/">Go home <span class="arrow" aria-hidden="true">&rarr;</span></a>
@@ -24,6 +58,62 @@
     </div>
   </div>
 </main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__top">
+      <div>
+        <a class="brand" href="/">
+          <span class="brand__mark">
+            <svg viewBox="0 0 32 32" fill="none" aria-hidden="true" style="color:#0a0a0a">
+              <rect x="1.25" y="1.25" width="29.5" height="29.5" stroke="currentColor" stroke-width="2.5"/>
+              <rect x="7" y="7" width="8" height="8" fill="currentColor" opacity=".28"/>
+              <rect x="17" y="17" width="8" height="8" fill="#1f9d4d"/>
+              <path d="M15.5 11.5h6.5v6.5" stroke="#1f9d4d" stroke-width="2.5"/>
+            </svg>
+          </span>
+          <span>DevLink<span class="brand__365">365</span></span>
+        </a>
+        <p class="footer__tagline">Share your localhost with anyone. One command, one link, gone by tomorrow.</p>
+      </div>
+
+      <div>
+        <h4>Product</h4>
+        <ul>
+          <li><a href="/#how">How it works</a></li>
+          <li><a href="/#features">Features</a></li>
+          <li><a href="/#security">Security</a></li>
+          <li><a href="/#roadmap">Roadmap</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Developers</h4>
+        <ul>
+          <li><a href="/docs.html">Documentation</a></li>
+          <li><a href="/docs.html#cli">CLI reference</a></li>
+          <li><a href="/docs.html#self-host">Self-hosting</a></li>
+          <li><a data-link="npm">npm package</a></li>
+          <li><a data-link="github">GitHub</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="/team.html">Team</a></li>
+          <li><a href="/docs.html">Docs</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <span>&copy; 2026 DevLink365</span>
+      <span>devlink365.dev</span>
+    </div>
+  </div>
+</footer>
+
 <script src="/assets/js/site.js" defer></script>
 </body>
 </html>

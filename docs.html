@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Documentation — DevLink365</title>
+<title>DevLink // Docs</title>
 <meta name="description" content="How to use DevLink365: the CLI, port selection, link lifetimes, the library API, security, and running your own relay.">
 <link rel="canonical" href="https://devlink365.dev/docs.html">
 <meta name="theme-color" content="#f4f4f0">
@@ -39,6 +39,7 @@
       <a class="nav__link" href="/">Home</a>
       <a class="nav__link" href="/#how">How it works</a>
       <a class="nav__link" href="/docs.html" aria-current="page">Docs</a>
+      <a class="nav__link" href="/team.html">Team</a>
       <a class="nav__link" data-link="github">GitHub</a>
       <a class="btn btn--solid nav__cta" data-link="npm">npm</a>
     </nav>
@@ -77,13 +78,13 @@
         <pre><code>npm run dev          <span class="t-dim"># terminal 1</span>
 npx devlink365       <span class="t-dim"># terminal 2</span></code></pre>
         <p>That is it. The CLI prints a public HTTPS URL. Send it to someone; they see your app.</p>
-        <pre><code>  ✓ DevLink365 is running
+        <pre><code>  &#10003; DevLink365 is running
 
   Local:   http://localhost:3000
   Public:  https://a8f3k2qd.devlink365.dev
 
   Expires: in 4 hours</code></pre>
-        <p>Nothing is installed globally — <code>npx</code> fetches the package, runs it, and forgets it. If you use it constantly:</p>
+        <p>Nothing is installed globally. <code>npx</code> fetches the package, runs it, and forgets it. If you use it constantly:</p>
         <pre><code>npm install -g devlink365</code></pre>
         <p>Requires Node.js 18.17 or newer. The package has no runtime dependencies.</p>
 
@@ -110,12 +111,12 @@ npx devlink365       <span class="t-dim"># terminal 2</span></code></pre>
         <p>A bare number is treated as a port, so <code>npx devlink365 5173</code> works too. The environment variable <code>DEVLINK365_RELAY</code> sets a default relay.</p>
 
         <h2 id="ports">Choosing a port</h2>
-        <p>With no <code>--port</code>, DevLink365 probes the ports that development tooling actually uses — 3000, 5173, 8080, 4321, 8000, 4200 and a dozen more — and also reads the <code>dev</code> script in a nearby <code>package.json</code> for a port you have configured yourself.</p>
+        <p>With no <code>--port</code>, DevLink365 probes the ports that development tooling actually uses (3000, 5173, 8080, 4321, 8000, 4200 and a dozen more) and also reads the <code>dev</code> script in a nearby <code>package.json</code> for a port you have configured yourself.</p>
         <p>It only ever auto-selects a port that answered with a real HTTP response. A port that is open but does not speak HTTP is almost always a database, a language server, or something else that has no business being on the public internet, so it is never chosen for you. You can still share one deliberately with <code>--port</code>.</p>
         <p>If more than one dev server is running, the most likely one is used and the others are printed so you can pick a different one.</p>
 
         <h2 id="expiration">Link lifetime</h2>
-        <p>Every link dies. That is the point — a link you forgot about is a security problem, so DevLink365 does not let you make one.</p>
+        <p>Every link dies. That is the point. A link you forgot about is a security problem, so DevLink365 does not let you make one.</p>
         <pre><code>npx devlink365 --expires 30m
 npx devlink365 --expires 4h      <span class="t-dim"># the default</span>
 npx devlink365 --expires 24h     <span class="t-dim"># the maximum</span></code></pre>
@@ -125,7 +126,7 @@ npx devlink365 --expires 24h     <span class="t-dim"># the maximum</span></code>
         <h2 id="naming">Naming a link</h2>
         <pre><code>npx devlink365 --name checkout-demo
 <span class="t-dim"># https://checkout-demo-k7m2xq.devlink365.dev</span></code></pre>
-        <p><code>--name</code> is a prefix, not a reservation. Random characters are always appended, because a guessable name must never produce a guessable URL. Reserved labels — <code>www</code>, <code>api</code>, <code>admin</code>, <code>login</code> and similar — are refused outright and you get a random id instead.</p>
+        <p><code>--name</code> is a prefix, not a reservation. Random characters are always appended, because a guessable name must never produce a guessable URL. Reserved labels (<code>www</code>, <code>api</code>, <code>admin</code>, <code>login</code> and similar) are refused outright and you get a random id instead.</p>
 
         <h2 id="library">Library API</h2>
         <p>The same tunnel, driven from code. Useful when a test suite or CI job needs a public URL for a few minutes.</p>
@@ -139,7 +140,7 @@ const tunnel = await createTunnel({
 
 console.log(tunnel.details?.url);
 
-tunnel.on("request", ({ method, url, status, durationMs }) => {
+tunnel.on("request", ({ method, url, status, durationMs }) =&gt; {
   console.log(method, url, status, durationMs);
 });
 
@@ -170,12 +171,12 @@ tunnel.stop();</code></pre>
             </tbody>
           </table>
         </div>
-        <p>Terminate TLS in front of the process — Cloudflare, Caddy, or a load balancer are all fine — and make sure it forwards WebSocket upgrades. Start the relay with <code>--trust-proxy</code> so rate limits see the real visitor address rather than your proxy's.</p>
+        <p>Terminate TLS in front of the process (Cloudflare, Caddy, or a load balancer are all fine) and make sure it forwards WebSocket upgrades. Start the relay with <code>--trust-proxy</code> so rate limits see the real visitor address rather than your proxy's.</p>
         <div class="table-scroll">
           <table>
             <thead><tr><th>Relay flag</th><th>What it does</th><th>Default</th></tr></thead>
             <tbody>
-              <tr><td>--domain &lt;host&gt;</td><td>Base domain. Required.</td><td>—</td></tr>
+              <tr><td>--domain &lt;host&gt;</td><td>Base domain. Required.</td><td>none</td></tr>
               <tr><td>--port &lt;number&gt;</td><td>Port to listen on.</td><td>8787 or $PORT</td></tr>
               <tr><td>--scheme &lt;https|http&gt;</td><td>Scheme used in the URLs handed to agents.</td><td>https</td></tr>
               <tr><td>--trust-proxy</td><td>Read X-Forwarded-For. Only behind a proxy you control.</td><td>off</td></tr>
@@ -203,7 +204,7 @@ tunnel.stop();</code></pre>
         <p>Almost always the machine sleeping or the network dropping. The CLI notices a failed keepalive and closes the tunnel rather than leaving a URL that silently swallows requests. Run it again for a fresh link.</p>
 
         <h3>"This relay is at capacity"</h3>
-        <p>Too many tunnels are open. Wait a minute, or run your own relay — see <a href="#self-host">self-hosting</a>.</p>
+        <p>Too many tunnels are open. Wait a minute, or run your own relay. See <a href="#self-host">self-hosting</a>.</p>
 
         <div class="btn-row" style="margin-top:44px">
           <a class="btn btn--green" href="/#start">
@@ -221,9 +222,55 @@ tunnel.stop();</code></pre>
 
 <footer class="footer">
   <div class="wrap">
-    <div class="footer__bottom" style="border-top:0;padding-top:0">
+    <div class="footer__top">
+      <div>
+        <a class="brand" href="/">
+          <span class="brand__mark">
+            <svg viewBox="0 0 32 32" fill="none" aria-hidden="true" style="color:#0a0a0a">
+              <rect x="1.25" y="1.25" width="29.5" height="29.5" stroke="currentColor" stroke-width="2.5"/>
+              <rect x="7" y="7" width="8" height="8" fill="currentColor" opacity=".28"/>
+              <rect x="17" y="17" width="8" height="8" fill="#1f9d4d"/>
+              <path d="M15.5 11.5h6.5v6.5" stroke="#1f9d4d" stroke-width="2.5"/>
+            </svg>
+          </span>
+          <span>DevLink<span class="brand__365">365</span></span>
+        </a>
+        <p class="footer__tagline">Share your localhost with anyone. One command, one link, gone by tomorrow.</p>
+      </div>
+
+      <div>
+        <h4>Product</h4>
+        <ul>
+          <li><a href="/#how">How it works</a></li>
+          <li><a href="/#features">Features</a></li>
+          <li><a href="/#security">Security</a></li>
+          <li><a href="/#roadmap">Roadmap</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Developers</h4>
+        <ul>
+          <li><a href="/docs.html">Documentation</a></li>
+          <li><a href="/docs.html#cli">CLI reference</a></li>
+          <li><a href="/docs.html#self-host">Self-hosting</a></li>
+          <li><a data-link="npm">npm package</a></li>
+          <li><a data-link="github">GitHub</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="/team.html">Team</a></li>
+          <li><a href="/docs.html">Docs</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
       <span>&copy; 2026 DevLink365</span>
-      <span><a href="/">devlink365.dev</a></span>
+      <span>devlink365.dev</span>
     </div>
   </div>
 </footer>
