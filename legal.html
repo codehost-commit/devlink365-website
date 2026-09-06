@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DevLink // Legal</title>
+<meta name="description" content="Terms of Service, Privacy Policy, and Attributions for DevLink365.">
+<link rel="canonical" href="https://devlink365.dev/legal.html">
+<meta name="theme-color" content="#f4f4f0">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/site.css">
+<script src="/assets/js/config.js"></script>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <div class="wrap nav__inner">
+    <a class="brand" href="/">
+      <span class="brand__mark">
+        <svg viewBox="0 0 32 32" fill="none" aria-hidden="true" style="color:#0a0a0a">
+          <rect x="1.25" y="1.25" width="29.5" height="29.5" stroke="currentColor" stroke-width="2.5"/>
+          <rect x="7" y="7" width="8" height="8" fill="currentColor" opacity=".28"/>
+          <rect x="17" y="17" width="8" height="8" fill="#1f9d4d"/>
+          <path d="M15.5 11.5h6.5v6.5" stroke="#1f9d4d" stroke-width="2.5"/>
+        </svg>
+      </span>
+      <span>DevLink<span class="brand__365">365</span></span>
+    </a>
+
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Menu">
+      <svg width="18" height="14" viewBox="0 0 18 14" fill="none" aria-hidden="true">
+        <path d="M0 1h18M0 7h18M0 13h18" stroke="currentColor" stroke-width="1.6"/>
+      </svg>
+    </button>
+
+    <nav class="nav__links" id="nav-links" aria-label="Primary">
+      <a class="nav__link" href="/">Home</a>
+      <a class="nav__link" href="/#how">How it works</a>
+      <a class="nav__link" href="/docs.html">Docs</a>
+      <a class="nav__link" href="/team.html">Team</a>
+      <a class="nav__link" data-link="github">GitHub</a>
+      <a class="btn btn--solid nav__cta" data-link="npm">npm</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="section">
+  <div class="wrap">
+
+    <div class="section-head">
+      <p class="eyebrow">Legal</p>
+      <h1 style="font-size:clamp(34px,5vw,54px)">Terms, privacy, and credits.</h1>
+      <p class="lead">The whole legal story for DevLink365, on one page. Plain language, no surprises.</p>
+    </div>
+
+    <div class="doc">
+      <aside class="toc">
+        <h4>On this page</h4>
+        <ul>
+          <li><a href="#terms">Terms of Service</a></li>
+          <li><a href="#privacy">Privacy Policy</a></li>
+          <li><a href="#attributions">Attributions</a></li>
+        </ul>
+      </aside>
+
+      <article class="prose">
+
+        <h2 id="terms">Terms of Service</h2>
+        <p>By installing the <code>devlink365</code> package, running it against a local server, or using the software in any form, you agree to the terms below.</p>
+
+        <h3>1. The software</h3>
+        <p>DevLink365 is free, open-source software that creates a temporary public HTTPS link to a web server already running on your own machine. It does not host your app, deploy anything, or require an account.</p>
+
+        <h3>2. Open source and license</h3>
+        <p>The code is released under the MIT license. You may read it, modify it, and run your own copy, including for commercial use, subject to that license.</p>
+
+        <h3>3. Your responsibilities</h3>
+        <p>You are responsible for what you expose through a link. A DevLink365 URL points the public internet at a server on your machine, so do not share anything you would not hand to a stranger, and do not point a link at an app holding production data or real credentials.</p>
+
+        <h3>4. Acceptable use</h3>
+        <p>Do not use DevLink365 to serve illegal content, distribute malware, run phishing or deceptive pages, or attack or overload other systems. Tunnels used for these purposes are terminated, and abuse may result in a block from the shared relay.</p>
+
+        <h3>5. The hosted relay</h3>
+        <p>The default relay at <code>relay.devlink365.dev</code> is provided as a convenience, on a best-effort basis, with rate limits and a hard link lifetime. It may be unavailable at times and carries no uptime guarantee. You can always run your own relay instead, as described in the <a href="/docs.html#self-host">documentation</a>.</p>
+
+        <h3>6. Prerelease software, provided as is</h3>
+        <p>DevLink365 is early software provided without warranty of any kind, express or implied. To the maximum extent permitted by law, the authors are not liable for any damages arising from its use.</p>
+
+        <h3>7. Free, with fair use</h3>
+        <p>There are no paid tiers. Reasonable limits apply so that a single user cannot exhaust the shared relay: request bodies are capped, visitors are rate limited per tunnel, and one machine can only hold a bounded number of links at a time.</p>
+
+        <h3>8. Changes and termination</h3>
+        <p>You can stop using DevLink365 at any time by closing the CLI, which ends the tunnel immediately. These terms may be updated as the product matures; continued use after a change means you accept the new terms.</p>
+
+        <h2 id="privacy">Privacy Policy</h2>
+        <p>DevLink365 runs on your machine and forwards your traffic. It is built to keep as little as possible.</p>
+
+        <h3>1. What runs where</h3>
+        <p>The CLI runs locally on your computer. Traffic between a visitor and your app is carried through whichever relay you connect to. By default that is <code>relay.devlink365.dev</code>; you can point it at your own relay instead.</p>
+
+        <h3>2. What the relay processes</h3>
+        <p>To route a request to your machine and the response back, the relay passes the HTTP traffic of your tunnel through memory. It does not store your request or response bodies.</p>
+
+        <h3>3. What the relay keeps</h3>
+        <p>Only operational metadata needed to run the service and prevent abuse: a tunnel id, coarse timing and request counts, and rate-limit state. A link and its routing state are discarded when the tunnel closes or expires.</p>
+
+        <h3>4. This website</h3>
+        <p>The site at <code>devlink365.dev</code> is a static site. It sets no tracking cookies and runs no third-party analytics.</p>
+
+        <h3>5. Self-hosting</h3>
+        <p>Run your own relay and none of your traffic touches our infrastructure at all. The whole system is designed so you never have to trust a server you do not control.</p>
+
+        <h3>6. Security</h3>
+        <p>URLs come from a cryptographic random source and are not enumerable, every link expires with a hard 24-hour ceiling, and closing the CLI kills the link immediately. Even so, anyone holding a live URL can reach your app, so treat any active link as public.</p>
+
+        <h2 id="attributions">Attributions</h2>
+        <p>DevLink365 is built and maintained by <a href="/team.html">Rahul Awasthi</a>, Founder and CEO.</p>
+        <p>The CLI and library are written in TypeScript with a zero-dependency WebSocket implementation built from the RFC. The relay runs on Fly.io behind a wildcard TLS certificate, and this website is served from Vercel. Thanks to the open-source projects and framework communities whose tools DevLink365 forwards every day.</p>
+
+        <div class="btn-row" style="margin-top:44px">
+          <a class="btn btn--green" href="/">
+            Back to home <span class="arrow" aria-hidden="true">&rarr;</span>
+          </a>
+          <a class="btn" href="/docs.html">
+            Read the docs <span class="arrow" aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+
+      </article>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__top">
+      <div>
+        <a class="brand" href="/">
+          <span class="brand__mark">
+            <svg viewBox="0 0 32 32" fill="none" aria-hidden="true" style="color:#0a0a0a">
+              <rect x="1.25" y="1.25" width="29.5" height="29.5" stroke="currentColor" stroke-width="2.5"/>
+              <rect x="7" y="7" width="8" height="8" fill="currentColor" opacity=".28"/>
+              <rect x="17" y="17" width="8" height="8" fill="#1f9d4d"/>
+              <path d="M15.5 11.5h6.5v6.5" stroke="#1f9d4d" stroke-width="2.5"/>
+            </svg>
+          </span>
+          <span>DevLink<span class="brand__365">365</span></span>
+        </a>
+        <p class="footer__tagline">Share your localhost with anyone. One command, one link, gone by tomorrow.</p>
+      </div>
+
+      <div>
+        <h4>Product</h4>
+        <ul>
+          <li><a href="/#how">How it works</a></li>
+          <li><a href="/#features">Features</a></li>
+          <li><a href="/#security">Security</a></li>
+          <li><a href="/#roadmap">Roadmap</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Developers</h4>
+        <ul>
+          <li><a href="/docs.html">Documentation</a></li>
+          <li><a href="/docs.html#cli">CLI reference</a></li>
+          <li><a href="/docs.html#self-host">Self-hosting</a></li>
+          <li><a data-link="npm">npm package</a></li>
+          <li><a data-link="github">GitHub</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="/team.html">Team</a></li>
+          <li><a href="/docs.html">Docs</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="/legal.html#terms">Terms</a></li>
+          <li><a href="/legal.html#privacy">Privacy</a></li>
+          <li><a href="/legal.html#attributions">Attributions</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <span>&copy; 2026 DevLink365</span>
+      <span><a href="/">devlink365.dev</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/js/site.js" defer></script>
+</body>
+</html>

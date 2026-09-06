@@ -3,7 +3,7 @@
  *
  * Everything here is progressive: the page is complete and readable with
  * JavaScript switched off. This adds the link wiring, the copy button, the
- * scroll reveal, the hero URL animation and the mobile nav.
+ * scroll reveal, the hero URL animation, the launch countdown and the mobile nav.
  */
 (function () {
   "use strict";
@@ -108,6 +108,48 @@
     targets.forEach(function (el) { observer.observe(el); });
   }
 
+  /* --- hero: launch countdown -------------------------------------------
+     Counts down to the public launch. When the target passes, the segments
+     are swapped for a "now live" line. The page reads fine without this. */
+  function wireCountdown() {
+    var root = document.querySelector("[data-countdown]");
+    if (!root) return;
+    var target = new Date(root.getAttribute("data-countdown") || "").getTime();
+    if (isNaN(target)) return;
+
+    var grid = root.querySelector("[data-countdown-grid]");
+    var live = root.querySelector("[data-countdown-live]");
+    var fields = {
+      days: root.querySelector('[data-cd="days"]'),
+      hours: root.querySelector('[data-cd="hours"]'),
+      mins: root.querySelector('[data-cd="mins"]'),
+      secs: root.querySelector('[data-cd="secs"]')
+    };
+
+    function pad(n) { return (n < 10 ? "0" : "") + n; }
+
+    function tick() {
+      var diff = target - Date.now();
+      if (diff <= 0) {
+        if (grid) grid.hidden = true;
+        if (live) live.hidden = false;
+        return true; // done
+      }
+      var s = Math.floor(diff / 1000);
+      var d = Math.floor(s / 86400); s -= d * 86400;
+      var h = Math.floor(s / 3600); s -= h * 3600;
+      var m = Math.floor(s / 60); s -= m * 60;
+      if (fields.days) fields.days.textContent = pad(d);
+      if (fields.hours) fields.hours.textContent = pad(h);
+      if (fields.mins) fields.mins.textContent = pad(m);
+      if (fields.secs) fields.secs.textContent = pad(s);
+      return false;
+    }
+
+    if (tick()) return;
+    var id = setInterval(function () { if (tick()) clearInterval(id); }, 1000);
+  }
+
   /* --- hero: type out a fresh public URL --------------------------------
      Purely decorative. The markup already contains a complete example URL, so
      nothing is missing if this never runs. */
@@ -134,7 +176,7 @@
 
     var cursor = document.createElement("span");
     cursor.className = "transform__cursor";
-    cursor.textContent = " ";
+    cursor.textContent = " ";
     cursor.setAttribute("aria-hidden", "true");
 
     var text = document.createElement("span");
@@ -185,6 +227,7 @@
     wireCopy();
     wireNav();
     wireReveal();
+    wireCountdown();
     wireHeroUrl();
     wireToc();
     document.documentElement.setAttribute("data-js", "true");
